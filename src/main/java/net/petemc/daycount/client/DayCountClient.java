@@ -1,6 +1,7 @@
 package net.petemc.daycount.client;
 
 import net.petemc.daycount.config.DayCountConfig;
+import java.text.NumberFormat;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -43,7 +44,11 @@ public class DayCountClient implements ClientModInitializer, HudRenderCallback {
             matrixStack.push();
             matrixStack.translate(DayCountConfig.INSTANCE.locationX, DayCountConfig.INSTANCE.locationY, 0);
             matrixStack.scale(DayCountConfig.INSTANCE.sizeX, DayCountConfig.INSTANCE.sizeY, 2.5f);
-            drawContext.drawTextWithShadow(textRenderer, "Day: " + (currentDay + DayCountConfig.INSTANCE.dayOffset), 2, 2, DayCountConfig.INSTANCE.color);
+            int dayNumber = currentDay + DayCountConfig.INSTANCE.dayOffset;
+            String formatted = DayCountConfig.INSTANCE.formatNumber
+                    ? NumberFormat.getInstance().format(dayNumber)
+                    : String.valueOf(dayNumber);
+            drawContext.drawTextWithShadow(textRenderer, "Day: " + formatted, 2, 2, DayCountConfig.INSTANCE.color);
             matrixStack.pop();
         }
     }

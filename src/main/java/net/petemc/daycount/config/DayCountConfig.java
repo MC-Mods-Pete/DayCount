@@ -46,4 +46,8 @@ public class DayCountConfig implements ConfigData
     @ConfigEntry.Gui.Tooltip()
     @Comment("Color of the Day Counter | default: 16777215 (for white)")
     public int color = 0xffffff;
+
+    @ConfigEntry.Gui.Tooltip()
+    @Comment("If true, the Day Count number will be formatted with locale-specific separators (e.g. 1,000) | default: false")
+    public boolean formatNumber = false;
 }
