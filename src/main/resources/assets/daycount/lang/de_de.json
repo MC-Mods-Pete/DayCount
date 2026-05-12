@@ -1,0 +1,35 @@
+{
+  "key.daycount.day_count": "DayCount umschalten",
+  "key.category.day_count_keybind": "DayCount Tastaturbelegung",
+
+  "daycount.configuration.dayCountEnabled": "DayCount AN/AUS?",
+  "daycount.configuration.displayDayCountWhileShowingF3Info": "DayCount anzeigen während F3-Info sichtbar ist?",
+  "daycount.configuration.dayOffset": "Offset in Tagen",
+  "daycount.configuration.sizeX": "Horizontale Größe",
+  "daycount.configuration.sizeY": "Vertikale Größe",
+  "daycount.configuration.locationX": "Horizontale Position",
+  "daycount.configuration.locationY": "Vertikale Position",
+  "daycount.configuration.textColorWithTransparency": "DayCounter Farbe (mit Transparenz)",
+  "daycount.configuration.dayCounterString": "Benutzerdefinierter DayCount-Text",
+
+  "text.autoconfig.daycount.title": "DayCount",
+  "text.autoconfig.daycount.option.dayCountEnabled": "DayCount anzeigen?",
+  "text.autoconfig.daycount.option.dayCountEnabled.@Tooltip": "Wenn aktiviert, wird der DayCount angezeigt | Standard: aktiviert",
+  "text.autoconfig.daycount.option.displayDayCountWhileShowingF3Info": "DayCount bei F3-Anzeige einblenden?",
+  "text.autoconfig.daycount.option.displayDayCountWhileShowingF3Info.@Tooltip": "Wenn aktiviert, wird der DayCount auch bei sichtbaren Debug-Infos (F3) angezeigt | Standard: deaktiviert",
+  "text.autoconfig.daycount.option.dayOffset": "Offset zum DayCounter addieren",
+  "text.autoconfig.daycount.option.dayOffset.@Tooltip": "Minecraft startet bei Tag 0, hiermit kann ein anderer Startwert festgelegt werden | Standard: 1",
+  "text.autoconfig.daycount.option.sizeX": "Horizontale Größe des DayCounters",
+  "text.autoconfig.daycount.option.sizeX.@Tooltip": "Horizontale Größe (X-Wert) des DayCounters | Standard: 2.0",
+  "text.autoconfig.daycount.option.sizeY": "Vertikale Größe des DayCounters",
+  "text.autoconfig.daycount.option.sizeY.@Tooltip": "Vertikale Größe (Y-Wert) des DayCounters | Standard: 2.0",
+  "text.autoconfig.daycount.option.locationX": "Horizontale Position des DayCounters",
+  "text.autoconfig.daycount.option.locationX.@Tooltip": "Horizontale Position (X-Wert) des DayCounters | Standard: 2.0",
+  "text.autoconfig.daycount.option.locationY": "Vertikale Position des DayCounters",
+  "text.autoconfig.daycount.option.locationY.@Tooltip": "Vertikale Position (Y-Wert) des DayCounters | Standard: 2.0",
+  "text.autoconfig.daycount.option.textColorWithTransparency": "DayCounter Farbe (mit Transparenz)",
+  "text.autoconfig.daycount.option.textColorWithTransparency.@Tooltip": "Farbe des DayCounters inkl. Transparenz (ARGB Hex) | Standard: FFFFFFFF",
+  "text.autoconfig.daycount.option.dayCounterString": "Benutzerdefinierter DayCount-Text",
+  "text.autoconfig.daycount.option.dayCounterString.@Tooltip": "Benutzerdefinierter DayCount-Text | Standard: 'Day: '"
+}
+

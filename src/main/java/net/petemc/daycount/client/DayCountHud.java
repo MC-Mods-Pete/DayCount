@@ -7,19 +7,17 @@ import net.neoforged.neoforge.client.gui.GuiLayer;
 import net.petemc.daycount.DayCountClient;
 import net.petemc.daycount.config.MainConfig;
 import org.jetbrains.annotations.NotNull;
-import org.joml.Matrix3x2fStack;
 
 public class DayCountHud implements GuiLayer {
     public static DayCountHud DAY_COUNT_HUD_INSTANCE;
-    private static String currentTextColor = "FFFFFFFF";
 
     public static void setCurrentTextColor(String value) {
         currentTextColor = value;
     }
-
     public String getCurrentTextColor() {
         return currentTextColor;
     }
+    private static String currentTextColor = "FFFFFFFF";
 
     public static void init() {
         DAY_COUNT_HUD_INSTANCE = new DayCountHud();
@@ -34,12 +32,12 @@ public class DayCountHud implements GuiLayer {
             assert mc.gameMode != null;
             if ((mc.gameMode.getPlayerMode().isSurvival() || mc.gameMode.getPlayerMode().isCreative()) &&
                     (!mc.getDebugOverlay().showDebugScreen() || MainConfig.getDisplayDayCountWhileShowingF3Info())) {
-                Matrix3x2fStack matrixStack = guiGraphics.pose();
-                matrixStack.pushMatrix();
-                matrixStack.translate(MainConfig.getLocationX(), MainConfig.getLocationY());
-                matrixStack.scale(MainConfig.getSizeX(), MainConfig.getSizeY());
+                var pose = guiGraphics.pose();
+                pose.pushMatrix();
+                pose.translate(MainConfig.getLocationX(), MainConfig.getLocationY());
+                pose.scale(MainConfig.getSizeX(), MainConfig.getSizeY());
                 guiGraphics.text(mc.font, MainConfig.getDayCounterString() + (currentDay + MainConfig.getDayOffset()), 1, 1, (int) Long.parseLong(currentTextColor, 16));
-                matrixStack.popMatrix();
+                pose.popMatrix();
             }
         }
     }

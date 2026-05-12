@@ -27,6 +27,7 @@ public class ModClientEvents {
 
     @SubscribeEvent
     public static void onKeyRegister(RegisterKeyMappingsEvent event) {
+        event.registerCategory(KeyBinding.DAYCOUNT_CATEGORY);
         event.register(KeyBinding.DAYCOUNT_KEY);
     }
 }

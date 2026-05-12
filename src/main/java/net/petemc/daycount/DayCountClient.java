@@ -31,7 +31,7 @@ public class DayCountClient {
 
     @SubscribeEvent
     static void onClientSetup(FMLClientSetupEvent event) {
-        DayCount.LOGGER.info("Initializing DayCount mod for Forge");
+        DayCount.LOGGER.info("Initializing DayCount mod for NeoForge");
         DayCountClient.dayCountEnabled = MainConfig.getDayCountEnabled();
         DayCountHud.setCurrentTextColor(MainConfig.getTextColorWithTransparency());
         DayCountHud.init();
