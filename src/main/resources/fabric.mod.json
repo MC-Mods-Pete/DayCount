@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "id": "${mod_id}",
+  "version": "${version}",
+  "name": "${mod_name}",
+  "description": "This mod adds a day counter HUD.",
+  "authors": [
+    "MC Mods Pete, mcmods.pete@gmail.com"
+  ],
+  "contact": {
+    "homepage": "https://www.curseforge.com/minecraft/mc-mods/daycount",
+    "sources": "https://github.com/MC-Mods-Pete/DayCount",
+    "issues": "https://github.com/MC-Mods-Pete/DayCount/issues"
+  },
+  "license": "All rights reserved",
+  "icon": "daycount.png",
+  "environment": "*",
+  "entrypoints": {
+    "client": [
+      "net.petemc.daycount.DayCountClient"
+    ],
+    "main": [
+      "net.petemc.daycount.DayCount"
+    ],
+    "modmenu": [
+      "net.petemc.daycount.util.ModMenuIntegration"
+    ]
+  },
+  "mixins": [
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "minecraft": ">=${minecraft_version}",
+    "java": "${java_version_range}",
+    "fabric-api": "*",
+    "cloth-config": ">=${cloth_config_version}"
+  },
+  "suggests": {
+    "modmenu": ">=${modmenu_version}",
+    "another-mod": "*"
+  }
+}
