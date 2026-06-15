@@ -29,6 +29,10 @@ public class MainConfig implements ConfigData
 
     public static String getDayCounterString() { return INSTANCE.dayCounterString; }
 
+    public static boolean isBoxEnabled() { return INSTANCE.boxEnabled; }
+
+    public static String getBoxColorWithTransparency() { return INSTANCE.boxColorWithTransparency; }
+
     @ConfigEntry.Gui.Excluded
     public static MainConfig INSTANCE;
 
@@ -72,4 +76,13 @@ public class MainConfig implements ConfigData
     @ConfigEntry.Gui.Tooltip()
     @Comment("DayCounter String | default: 'Day: '")
     public String dayCounterString = "Day: ";
+
+    @ConfigEntry.Gui.Tooltip()
+    @Comment("Enable background box | default: false")
+    public boolean boxEnabled = false;
+
+    @ConfigEntry.Gui.Tooltip()
+    @Comment("Color of the Box (with transparency) | default: 80000000")
+    public String boxColorWithTransparency = "80000000";
 }
+

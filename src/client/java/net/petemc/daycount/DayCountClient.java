@@ -37,11 +37,28 @@ public class DayCountClient implements ClientModInitializer {
                 assert mc.gameMode != null;
                 if ((mc.gameMode.getPlayerMode().isSurvival() || mc.gameMode.getPlayerMode().isCreative()) &&
                         (!mc.getDebugOverlay().showDebugScreen() || MainConfig.getDisplayDayCountWhileShowingF3Info())) {
+
+                    String text = MainConfig.getDayCounterString() + (currentDay + MainConfig.getDayOffset());
+                    int textWidth = mc.font.width(text);
+                    int textHeight = mc.font.lineHeight;
+                    int textX = 0;
+                    int textY = 0;
+
                     var pose = guiGraphics.pose();
                     pose.pushMatrix();
                     pose.translate(MainConfig.getLocationX(), MainConfig.getLocationY(), pose);
                     pose.scale(MainConfig.getSizeX(), MainConfig.getSizeY(), pose);
-                    guiGraphics.text(mc.font, MainConfig.getDayCounterString() + (currentDay + MainConfig.getDayOffset()), 1, 1, (int) Long.parseLong(currentTextColor, 16));
+
+                    // Box Rendering
+                    if (MainConfig.isBoxEnabled()) {
+                        int boxColor = (int) Long.parseLong(MainConfig.getBoxColorWithTransparency(), 16);
+                        // Draw a rectangle with padding around the text
+                        guiGraphics.fill(textX - 2, textY - 2, textX + textWidth + 1, textY + textHeight + 1, boxColor);
+                    }
+
+                    // Text Rendering
+                    guiGraphics.text(mc.font, text, textX, textY, (int) Long.parseLong(currentTextColor, 16));
+
                     pose.popMatrix();
                 }
             }
