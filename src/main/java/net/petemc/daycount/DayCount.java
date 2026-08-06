@@ -1,6 +1,5 @@
 package net.petemc.daycount;
 
-import net.petemc.daycount.config.DayCountConfig;
 import net.fabricmc.api.ModInitializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,7 +10,6 @@ public class DayCount implements ModInitializer {
 
     @Override
     public void onInitialize() {
-        LOGGER.info("Initializing Day Count Mod");
-        DayCountConfig.init();
+
     }
 }
