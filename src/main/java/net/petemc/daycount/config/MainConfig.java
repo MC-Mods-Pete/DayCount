@@ -29,6 +29,8 @@ public class MainConfig implements ConfigData
 
     public static String getDayCounterString() { return INSTANCE.dayCounterString; }
 
+    public static boolean getUseLocaleFormatting() { return INSTANCE.useLocaleFormatting; }
+
     public static boolean isBoxEnabled() { return INSTANCE.boxEnabled; }
 
     public static String getBoxColorWithTransparency() { return INSTANCE.boxColorWithTransparency; }
@@ -76,6 +78,10 @@ public class MainConfig implements ConfigData
     @ConfigEntry.Gui.Tooltip()
     @Comment("DayCounter String | default: 'Day: '")
     public String dayCounterString = "Day: ";
+
+    @ConfigEntry.Gui.Tooltip()
+    @Comment("If true, the Day Count number will be formatted with locale-specific separators (e.g. 1,000) | default: false")
+    public boolean useLocaleFormatting = false;
 
     @ConfigEntry.Gui.Tooltip()
     @Comment("Enable background box | default: false")

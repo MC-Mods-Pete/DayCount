@@ -11,6 +11,7 @@
   "daycount.configuration.locationY": "Vertikale Position",
   "daycount.configuration.textColorWithTransparency": "DayCounter Farbe (mit Transparenz)",
   "daycount.configuration.dayCounterString": "Benutzerdefinierter DayCount-Text",
+  "daycount.configuration.useLocaleFormatting": "Locale-Formatierung verwenden",
   "daycount.configuration.boxEnabled": "Hintergrundbox aktivieren?",
   "daycount.configuration.boxColorWithTransparency": "Box-Farbe (mit Transparenz)",
 
@@ -33,6 +34,8 @@
   "text.autoconfig.daycount.option.textColorWithTransparency.@Tooltip": "Farbe des DayCounters inkl. Transparenz (ARGB Hex) | Standard: FFFFFFFF",
   "text.autoconfig.daycount.option.dayCounterString": "Benutzerdefinierter DayCount-Text",
   "text.autoconfig.daycount.option.dayCounterString.@Tooltip": "Benutzerdefinierter DayCount-Text | Standard: 'Day: '",
+  "text.autoconfig.daycount.option.useLocaleFormatting": "Locale-Formatierung verwenden",
+  "text.autoconfig.daycount.option.useLocaleFormatting.@Tooltip": "Wenn aktiviert, wird die Zahl unter Verwendung der System-Locale formatiert (z. B. 1.000 oder 1,000) | Standard: deaktiviert",
   "text.autoconfig.daycount.option.boxEnabled": "Hintergrundbox aktivieren?",
   "text.autoconfig.daycount.option.boxEnabled.@Tooltip": "Wenn aktiviert, wird eine Hintergrundbox angezeigt | Standard: deaktiviert",
   "text.autoconfig.daycount.option.boxColorWithTransparency": "Farbe der Box (mit Transparenz)",

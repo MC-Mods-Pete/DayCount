@@ -10,6 +10,8 @@ import net.minecraft.resources.Identifier;
 import net.petemc.daycount.config.MainConfig;
 import net.petemc.daycount.handler.KeyInputHandler;
 
+import java.text.NumberFormat;
+
 @Environment(EnvType.CLIENT)
 public class DayCountClient implements ClientModInitializer {
     Identifier dayCountHudElement = Identifier.fromNamespaceAndPath(DayCount.MOD_ID, "daycount_hud");
@@ -38,7 +40,12 @@ public class DayCountClient implements ClientModInitializer {
                 if ((mc.gameMode.getPlayerMode().isSurvival() || mc.gameMode.getPlayerMode().isCreative()) &&
                         (!mc.getDebugOverlay().showDebugScreen() || MainConfig.getDisplayDayCountWhileShowingF3Info())) {
 
-                    String text = MainConfig.getDayCounterString() + (currentDay + MainConfig.getDayOffset());
+                    int dayCount = (currentDay + MainConfig.getDayOffset());
+                    String formattedDayCount = MainConfig.getUseLocaleFormatting()
+                            ? NumberFormat.getInstance().format(dayCount)
+                            : String.valueOf(dayCount);
+
+                    String text = MainConfig.getDayCounterString() + formattedDayCount;
                     int textWidth = mc.font.width(text);
                     int textHeight = mc.font.lineHeight;
                     int textX = 0;

@@ -11,6 +11,7 @@
   "daycount.configuration.locationY": "Vertical Position",
   "daycount.configuration.textColorWithTransparency": "DayCount Color (with transparency)",
   "daycount.configuration.dayCounterString": "Custom DayCount String",
+  "daycount.configuration.useLocaleFormatting": "Use Locale Formatting",
   "daycount.configuration.boxEnabled": "Enable background box?",
   "daycount.configuration.boxColorWithTransparency": "Box Color (with transparency)",
 
@@ -33,6 +34,8 @@
   "text.autoconfig.daycount.option.textColorWithTransparency.@Tooltip": "Color of the Day Counter including transparency (ARGB hex) | default: FFFFFFFF",
   "text.autoconfig.daycount.option.dayCounterString": "Custom DayCount String",
   "text.autoconfig.daycount.option.dayCounterString.@Tooltip": "Custom DayCount String | default: 'Day: '",
+  "text.autoconfig.daycount.option.useLocaleFormatting": "Use Locale Formatting",
+  "text.autoconfig.daycount.option.useLocaleFormatting.@Tooltip": "If true, the Day Count number will be formatted using the system's locale (e.g., 1,000 or 1.000) | default: false",
   "text.autoconfig.daycount.option.boxEnabled": "Enable background box?",
   "text.autoconfig.daycount.option.boxEnabled.@Tooltip": "If enabled, a background box will be displayed | default: false",
   "text.autoconfig.daycount.option.boxColorWithTransparency": "Color of the Box (with Transparency)",
