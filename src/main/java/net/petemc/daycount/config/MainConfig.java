@@ -37,6 +37,12 @@ public class MainConfig
 
     public static String getDayCounterString() { return dayCounterString; }
 
+    public static boolean getUseLocaleFormatting() { return useLocaleFormatting; }
+
+    public static boolean isBoxEnabled() { return isBoxEnabled; }
+
+    public static String getBoxColorWithTransparency() { return boxColorWithTransparency; }
+
     // Server Config
     private static final ModConfigSpec.Builder BUILDER_SERVER = new ModConfigSpec.Builder();
     // no server config
@@ -81,6 +87,18 @@ public class MainConfig
             .comment("DayCounter String | default: 'Day: '")
             .define("dayCounterString", "Day: ");
 
+    private static final ModConfigSpec.BooleanValue USE_LOCALE_FORMATTING = BUILDER_CLIENT
+            .comment("If true, the Day Count number will be formatted with locale-specific separators (e.g. 1,000) | default: false")
+            .define("useLocaleFormatting", false);
+
+    private static final ModConfigSpec.BooleanValue BOX_ENABLED = BUILDER_CLIENT
+            .comment("If true, the box will be displayed | default: false")
+            .define("isBoxEnabled", false);
+
+    private static final ModConfigSpec.ConfigValue<String> BOX_COLOR_WITH_TRANSPARENCY = BUILDER_CLIENT
+            .comment("Color of the box (with transparency) | default: 80000000")
+            .define("boxColorWithTransparency", "80000000");
+
     public static final ModConfigSpec SPEC_CLIENT = BUILDER_CLIENT.build();
 
     private static boolean dayCountEnabled = true;
@@ -92,6 +110,9 @@ public class MainConfig
     private static float locationY = 2.0f;
     private static String textColorWithTransparency = "FFFFFFFF";
     private static String dayCounterString = "Day: ";
+    private static boolean useLocaleFormatting = false;
+    private static boolean isBoxEnabled = false;
+    private static String boxColorWithTransparency = "80000000";
 
     @SubscribeEvent
     static void onLoad(final ModConfigEvent event)
@@ -111,6 +132,9 @@ public class MainConfig
             locationY = LOCATION_Y.get().floatValue();
             textColorWithTransparency = TEXT_COLOR_WITH_TRANSPARENCY.get();
             dayCounterString = DAY_COUNT_STRING.get();
+            useLocaleFormatting = USE_LOCALE_FORMATTING.get();
+            isBoxEnabled = BOX_ENABLED.get();
+            boxColorWithTransparency = BOX_COLOR_WITH_TRANSPARENCY.get();
         }
     }
 }
