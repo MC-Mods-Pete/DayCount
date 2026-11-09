@@ -1,7 +1,8 @@
 package net.petemc.daycount.client;
 
+import net.minecraft.client.render.RenderTickCounter;
 import net.petemc.daycount.DayCount;
-import net.petemc.daycount.config.DayCountConfig;
+import net.petemc.daycount.config.MainConfig;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -12,6 +13,8 @@ import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.util.math.MatrixStack;
 
+import java.text.NumberFormat;
+
 @Environment(EnvType.CLIENT)
 public class DayCountClient implements ClientModInitializer, HudRenderCallback {
     private int currentDayTime = -1;
@@ -20,7 +23,7 @@ public class DayCountClient implements ClientModInitializer, HudRenderCallback {
     @Override
     public void onInitializeClient() {
         DayCount.LOGGER.info("Initializing Day Count Mod");
-        DayCountConfig.init();
+        MainConfig.init();
         KeyInputHandler.register();
 
         ClientTickEvents.START_CLIENT_TICK.register(client -> {
@@ -38,18 +41,41 @@ public class DayCountClient implements ClientModInitializer, HudRenderCallback {
     }
 
     @Override
-    public void onHudRender(DrawContext drawContext, float tickDelta) {
+    public void onHudRender(DrawContext drawContext, RenderTickCounter tickCounter) {
         MinecraftClient mcClient = MinecraftClient.getInstance();
-        if (DayCountConfig.INSTANCE.dayCountEnabled) {
+        if (MainConfig.isDayCountEnabled()) {
             if (mcClient.player != null) {
-                if ((!mcClient.player.isSpectator() && !mcClient.options.debugEnabled)) {
+                assert mcClient.interactionManager != null;
+                if ((mcClient.interactionManager.getCurrentGameMode().isSurvivalLike() || mcClient.interactionManager.getCurrentGameMode().isCreative()) &&
+                        !mcClient.getDebugHud().shouldShowDebugHud()) {
                     TextRenderer textRenderer = mcClient.textRenderer;
                     MatrixStack matrixStack = drawContext.getMatrices();
 
+                    int dayCount = (currentDayTime + MainConfig.getDayOffset());
+                    String formattedDayCount = MainConfig.getUseLocaleFormatting()
+                            ? NumberFormat.getInstance().format(dayCount)
+                            : String.valueOf(dayCount);
+
+                    String text = MainConfig.getDayCounterString() + formattedDayCount;
+                    int textWidth = textRenderer.getWidth(text);
+                    int textHeight = textRenderer.fontHeight;
+                    int textX = 0;
+                    int textY = 0;
+
                     matrixStack.push();
-                    matrixStack.translate(DayCountConfig.INSTANCE.locationX, DayCountConfig.INSTANCE.locationY, 0);
-                    matrixStack.scale(DayCountConfig.INSTANCE.sizeX, DayCountConfig.INSTANCE.sizeY, 2.5f);
-                    drawContext.drawTextWithShadow(textRenderer, "Day: " + (currentDayTime + DayCountConfig.INSTANCE.dayOffset), 2, 2, DayCountConfig.INSTANCE.color);
+                    matrixStack.translate(MainConfig.getLocationX(), MainConfig.getLocationY(), 0);
+                    matrixStack.scale(MainConfig.getSizeX(), MainConfig.getSizeY(), 2.5f);
+
+
+                    // Box Rendering
+                    if (MainConfig.isBoxEnabled()) {
+                        int boxColor = (int) Long.parseLong(MainConfig.getBoxColorWithTransparency(), 16);
+                        // Draw a rectangle with padding around the text
+                        drawContext.fill(textX - 2, textY - 2, textX + textWidth + 1, textY + textHeight + 1, boxColor);
+                    }
+
+                    // Text Rendering
+                    drawContext.drawTextWithShadow(textRenderer, text, textX, textY, (int) Long.parseLong(MainConfig.getTextColor(), 16));
                     matrixStack.pop();
                 }
             }

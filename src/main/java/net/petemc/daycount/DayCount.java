@@ -10,6 +10,6 @@ public class DayCount implements ModInitializer {
 
     @Override
     public void onInitialize() {
-
+        LOGGER.info("client side mod, ignoring server side");
     }
 }
