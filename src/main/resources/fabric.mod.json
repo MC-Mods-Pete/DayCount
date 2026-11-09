@@ -13,7 +13,7 @@
     "issues": "https://github.com/MC-Mods-Pete/DayCount/issues"
   },
   "license": "MIT",
-  "icon": "assets/daycountmod/icon.png",
+  "icon": "daycount.png",
   "environment": "*",
   "entrypoints": {
     "client": [
@@ -27,14 +27,14 @@
     ]
   },
   "depends": {
-    "fabricloader": ">=0.15.9",
-    "fabric": "*",
-    "minecraft": ">=1.20"
+    "fabricloader": "${fabric_version_range}",
+    "minecraft": "${mc_version_range}",
+    "java": "${java_version_range}",
+    "fabric-api": "*",
+    "cloth-config": ">=${cloth_config_version}"
   },
-
-  "depends": {
-    "fabricloader": ">=0.14.11",
-    "fabric": "*",
-    "minecraft": ">=1.19"
+  "suggests": {
+    "modmenu": ">=${modmenu_version}",
+    "another-mod": "*"
   }
 }
