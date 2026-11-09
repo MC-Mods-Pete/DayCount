@@ -13,6 +13,8 @@ import net.minecraftforge.client.gui.overlay.IGuiOverlay;
 import net.petemc.daycount.DayCount;
 import net.petemc.daycount.config.MainConfig;
 
+import java.text.NumberFormat;
+
 @OnlyIn(Dist.CLIENT)
 public class DayCountClient {
     private static String currentTextColor = "FFFFFF";
@@ -33,12 +35,33 @@ public class DayCountClient {
             assert mc.gameMode != null;
             if ((mc.gameMode.getPlayerMode().isSurvival() || mc.gameMode.getPlayerMode().isCreative()) &&
                     !mc.options.renderDebug) {
+
+                int dayCount = (currentDay + MainConfig.getDayOffset());
+                String formattedDayCount = MainConfig.getUseLocaleFormatting()
+                        ? NumberFormat.getInstance().format(dayCount)
+                        : String.valueOf(dayCount);
+
+                String text = MainConfig.getDayCounterString() + formattedDayCount;
+                int textWidth = mc.font.width(text);
+                int textHeight = mc.font.lineHeight;
+                int textX = 0;
+                int textY = 0;
+
                 poseStack.pushPose();
                 poseStack.translate(MainConfig.getLocationX(), MainConfig.getLocationY(), 0);
                 poseStack.scale(MainConfig.getSizeX(), MainConfig.getSizeY(), 2.5f);
                 RenderSystem.setShader(GameRenderer::getPositionTexShader);
                 RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
-                GuiComponent.drawString(poseStack, mc.font, MainConfig.getDayCounterString() + (currentDay + MainConfig.getDayOffset()), 2, 2, Integer.parseInt(currentTextColor, 16));
+
+                // Box Rendering
+                if (MainConfig.isBoxEnabled()) {
+                    int boxColor = (int) Long.parseLong(MainConfig.getBoxColorWithTransparency(), 16);
+                    // Draw a rectangle with padding around the text
+                    GuiComponent.fill(poseStack, textX - 2, textY - 2, textX + textWidth + 1, textY + textHeight + 1, boxColor);
+                }
+
+                // Text Rendering
+                GuiComponent.drawString(poseStack, mc.font, text, textX, textY, (int) Long.parseLong(currentTextColor, 16));
                 poseStack.popPose();
             }
         }
