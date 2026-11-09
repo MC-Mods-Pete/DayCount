@@ -6,6 +6,7 @@ import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.petemc.daycount.DayCount;
+import net.petemc.daycount.config.MainConfig;
 import net.petemc.daycount.util.KeyBinding;
 
 public class ClientEvents {
@@ -15,7 +16,7 @@ public class ClientEvents {
         @SubscribeEvent
         public static void onKeyInput(InputEvent.Key event) {
             if (KeyBinding.DAYCOUNT_KEY.consumeClick()) {
-                DayCount.dayCountEnabled = !DayCount.dayCountEnabled;
+                MainConfig.toggleDayCountEnabled();
             }
         }
     }
