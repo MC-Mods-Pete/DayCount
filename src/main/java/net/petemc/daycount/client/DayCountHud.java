@@ -7,31 +7,20 @@ import net.minecraft.client.renderer.GameRenderer;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.gui.overlay.IGuiOverlay;
-import net.petemc.daycount.DayCount;
 import net.petemc.daycount.config.MainConfig;
+import net.petemc.daycount.util.ColorUtil;
 
 import java.text.NumberFormat;
 
 @OnlyIn(Dist.CLIENT)
 public class DayCountHud {
-    private static String currentTextColor = "FFFFFF";
-
-    public static void setCurrentTextColor(String value) {
-        currentTextColor = value;
-    }
-
-    public String getCurrentTextColor() {
-        return currentTextColor;
-    }
 
     public static final IGuiOverlay HUD_DAY_COUNTER = ((gui, guiGraphics, partialTick, width, height) -> {
-        if (DayCount.dayCountEnabled) {
-            Minecraft mc = Minecraft.getInstance();
-            assert mc.level != null;
+        Minecraft mc = Minecraft.getInstance();
+        if (MainConfig.getDayCountEnabled() && !mc.options.hideGui && mc.level != null && mc.gameMode != null) {
             int currentDay = (int) (mc.level.getDayTime() / 24000L);
-            assert mc.gameMode != null;
             if (((mc.gameMode.getPlayerMode().isSurvival() || mc.gameMode.getPlayerMode().isCreative()) &&
-                    !mc.options.renderDebug)) {
+                    (!mc.options.renderDebug || MainConfig.getDisplayDayCountWhileShowingF3Info()))) {
 
                 int dayCount = (currentDay + MainConfig.getDayOffset());
                 String formattedDayCount = MainConfig.getUseLocaleFormatting()
@@ -54,13 +43,13 @@ public class DayCountHud {
 
                 // Box Rendering
                 if (MainConfig.isBoxEnabled()) {
-                    int boxColor = (int) Long.parseLong(MainConfig.getBoxColorWithTransparency(), 16);
+                    int boxColor = ColorUtil.parseArgb(MainConfig.getBoxColorWithTransparency(), ColorUtil.DEFAULT_BOX_COLOR);
                     // Draw a rectangle with padding around the text
                     guiGraphics.fill(textX - 2, textY - 2, textX + textWidth + 1, textY + textHeight + 1, boxColor);
                 }
 
                 // Text Rendering
-                guiGraphics.drawString(mc.font, text, textX, textY, (int) Long.parseLong(currentTextColor, 16));
+                guiGraphics.drawString(mc.font, text, textX, textY, ColorUtil.parseArgb(MainConfig.getTextColor(), ColorUtil.DEFAULT_TEXT_COLOR));
 
                 matrixStack.popPose();
             }
