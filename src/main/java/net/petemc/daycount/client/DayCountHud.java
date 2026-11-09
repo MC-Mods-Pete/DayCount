@@ -11,22 +11,17 @@ import net.petemc.daycount.DayCount;
 import net.petemc.daycount.config.MainConfig;
 import org.jetbrains.annotations.NotNull;
 
+import java.text.NumberFormat;
+
 @OnlyIn(Dist.CLIENT)
 public class DayCountHud implements LayeredDraw.Layer {
     public static DayCountHud DAY_COUNT_HUD_INSTANCE;
+
+    public static void setCurrentTextColor(String value) { currentTextColor = value; }
+    public String getCurrentTextColor() { return currentTextColor; }
     private static String currentTextColor = "FFFFFF";
 
-    public static void setCurrentTextColor(String value) {
-        currentTextColor = value;
-    }
-
-    public String getCurrentTextColor() {
-        return currentTextColor;
-    }
-
-    public static void init() {
-        DAY_COUNT_HUD_INSTANCE = new DayCountHud();
-    }
+    public static void init() { DAY_COUNT_HUD_INSTANCE = new DayCountHud(); }
 
     @Override
     public void render(@NotNull GuiGraphics guiGraphics, @NotNull DeltaTracker deltaTracker) {
@@ -35,12 +30,36 @@ public class DayCountHud implements LayeredDraw.Layer {
             assert mc.level != null;
             int currentDay = (int) (mc.level.getDayTime() / 24000L);
             assert mc.gameMode != null;
-            if (mc.gameMode.getPlayerMode().isSurvival() || mc.gameMode.getPlayerMode().isCreative()) {
+            if ((mc.gameMode.getPlayerMode().isSurvival() || mc.gameMode.getPlayerMode().isCreative()) &&
+                    (!mc.getDebugOverlay().showDebugScreen())) {
+
+                int dayCount = (currentDay + MainConfig.getDayOffset());
+                String formattedDayCount = MainConfig.getUseLocaleFormatting()
+                        ? NumberFormat.getInstance().format(dayCount)
+                        : String.valueOf(dayCount);
+
+                String text = MainConfig.getDayCounterString() + formattedDayCount;
+                int textWidth = mc.font.width(text);
+                int textHeight = mc.font.lineHeight;
+                int textX = 0;
+                int textY = 0;
+
                 PoseStack matrixStack = guiGraphics.pose();
                 matrixStack.pushPose();
                 matrixStack.translate(MainConfig.getLocationX(), MainConfig.getLocationY(), 0);
                 matrixStack.scale(MainConfig.getSizeX(), MainConfig.getSizeY(), 2.5f);
-                guiGraphics.drawString(mc.font, MainConfig.getDayCounterString() + (currentDay + MainConfig.getDayOffset()), 1, 1, Integer.parseInt(currentTextColor, 16));
+
+
+                // Box Rendering
+                if (MainConfig.isBoxEnabled()) {
+                    int boxColor = (int) Long.parseLong(MainConfig.getBoxColorWithTransparency(), 16);
+                    // Draw a rectangle with padding around the text
+                    guiGraphics.fill(textX - 2, textY - 2, textX + textWidth + 1, textY + textHeight + 1, boxColor);
+                }
+
+                // Text Rendering
+                guiGraphics.drawString(mc.font, text, textX, textY, (int) Long.parseLong(currentTextColor, 16));
+
                 matrixStack.popPose();
             }
         }
