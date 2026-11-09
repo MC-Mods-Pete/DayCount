@@ -3,10 +3,10 @@ package net.petemc.daycount.client;
 import net.minecraft.client.render.RenderTickCounter;
 import net.petemc.daycount.DayCount;
 import net.petemc.daycount.config.MainConfig;
+import net.petemc.daycount.util.ColorUtil;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
@@ -17,41 +17,27 @@ import java.text.NumberFormat;
 
 @Environment(EnvType.CLIENT)
 public class DayCountClient implements ClientModInitializer, HudRenderCallback {
-    private int currentDayTime = -1;
-    private int cachedDayTime = -1;
-
     @Override
     public void onInitializeClient() {
         DayCount.LOGGER.info("Initializing Day Count Mod");
         MainConfig.init();
         KeyInputHandler.register();
-
-        ClientTickEvents.START_CLIENT_TICK.register(client -> {
-            if ((client.player != null) && (client.world != null)) {
-                currentDayTime = (int) (client.world.getTimeOfDay() / 24000L);
-                if (currentDayTime != cachedDayTime) {
-                    // Day time has changed, update the cached value and do any necessary updates
-                    cachedDayTime = currentDayTime;
-                    // Update the GUI or other elements as needed
-                    client.getFramebuffer().beginWrite(false);
-                    HudRenderCallback.EVENT.register(this);
-                }
-            }
-        });
+        HudRenderCallback.EVENT.register(this);
     }
 
     @Override
     public void onHudRender(DrawContext drawContext, RenderTickCounter tickCounter) {
         MinecraftClient mcClient = MinecraftClient.getInstance();
-        if (MainConfig.isDayCountEnabled()) {
-            if (mcClient.player != null) {
+        if (MainConfig.isDayCountEnabled() && !mcClient.options.hudHidden) {
+            if (mcClient.player != null && mcClient.world != null) {
                 assert mcClient.interactionManager != null;
                 if ((mcClient.interactionManager.getCurrentGameMode().isSurvivalLike() || mcClient.interactionManager.getCurrentGameMode().isCreative()) &&
-                        !mcClient.getDebugHud().shouldShowDebugHud()) {
+                        (!mcClient.getDebugHud().shouldShowDebugHud() || MainConfig.getDisplayDayCountWhileShowingF3Info())) {
                     TextRenderer textRenderer = mcClient.textRenderer;
                     MatrixStack matrixStack = drawContext.getMatrices();
 
-                    int dayCount = (currentDayTime + MainConfig.getDayOffset());
+                    int currentDay = (int) (mcClient.world.getTimeOfDay() / 24000L);
+                    int dayCount = (currentDay + MainConfig.getDayOffset());
                     String formattedDayCount = MainConfig.getUseLocaleFormatting()
                             ? NumberFormat.getInstance().format(dayCount)
                             : String.valueOf(dayCount);
@@ -69,13 +55,13 @@ public class DayCountClient implements ClientModInitializer, HudRenderCallback {
 
                     // Box Rendering
                     if (MainConfig.isBoxEnabled()) {
-                        int boxColor = (int) Long.parseLong(MainConfig.getBoxColorWithTransparency(), 16);
+                        int boxColor = ColorUtil.parseArgb(MainConfig.getBoxColorWithTransparency(), ColorUtil.DEFAULT_BOX_COLOR);
                         // Draw a rectangle with padding around the text
                         drawContext.fill(textX - 2, textY - 2, textX + textWidth + 1, textY + textHeight + 1, boxColor);
                     }
 
                     // Text Rendering
-                    drawContext.drawTextWithShadow(textRenderer, text, textX, textY, (int) Long.parseLong(MainConfig.getTextColor(), 16));
+                    drawContext.drawTextWithShadow(textRenderer, text, textX, textY, ColorUtil.parseArgb(MainConfig.getTextColor(), ColorUtil.DEFAULT_TEXT_COLOR));
                     matrixStack.pop();
                 }
             }
