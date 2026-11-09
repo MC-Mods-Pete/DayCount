@@ -7,8 +7,8 @@ import net.neoforged.neoforge.client.event.InputEvent;
 import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
 import net.neoforged.neoforge.client.event.RenderGuiEvent;
 import net.petemc.daycount.DayCount;
-import net.petemc.daycount.DayCountClient;
 import net.petemc.daycount.client.DayCountHud;
+import net.petemc.daycount.config.MainConfig;
 import net.petemc.daycount.util.KeyBinding;
 
 @EventBusSubscriber (modid = DayCount.MOD_ID, value = Dist.CLIENT)
@@ -16,7 +16,7 @@ public class ModClientEvents {
     @SubscribeEvent
     public static void onKeyInput(InputEvent.Key event) {
         if (KeyBinding.DAYCOUNT_KEY.consumeClick()) {
-            DayCountClient.dayCountEnabled = !DayCountClient.dayCountEnabled;
+            MainConfig.toggleDayCountEnabled();
         }
     }
 

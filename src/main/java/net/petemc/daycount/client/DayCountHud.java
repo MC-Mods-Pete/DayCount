@@ -4,8 +4,8 @@ import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.neoforged.neoforge.client.gui.GuiLayer;
-import net.petemc.daycount.DayCountClient;
 import net.petemc.daycount.config.MainConfig;
+import net.petemc.daycount.util.ColorUtil;
 import org.jetbrains.annotations.NotNull;
 
 import java.text.NumberFormat;
@@ -13,25 +13,16 @@ import java.text.NumberFormat;
 public class DayCountHud implements GuiLayer {
     public static DayCountHud DAY_COUNT_HUD_INSTANCE;
 
-    public static void setCurrentTextColor(String value) {
-        currentTextColor = value;
-    }
-    public String getCurrentTextColor() {
-        return currentTextColor;
-    }
-    private static String currentTextColor = "FFFFFFFF";
-
     public static void init() {
         DAY_COUNT_HUD_INSTANCE = new DayCountHud();
     }
 
     @Override
     public void render(@NotNull GuiGraphicsExtractor guiGraphics, @NotNull DeltaTracker deltaTracker) {
-        if (DayCountClient.dayCountEnabled) {
-            Minecraft mc = Minecraft.getInstance();
-            assert mc.level != null;
+        Minecraft mc = Minecraft.getInstance();
+        // RenderGuiEvent.Post also fires while the HUD is hidden (F1), so check that here
+        if (MainConfig.getDayCountEnabled() && !mc.gui.hud.isHidden() && mc.level != null && mc.gameMode != null) {
             int currentDay = (int) (mc.level.getOverworldClockTime() / 24000L);
-            assert mc.gameMode != null;
             if ((mc.gameMode.getPlayerMode().isSurvival() || mc.gameMode.getPlayerMode().isCreative()) &&
                     (!mc.getDebugOverlay().showDebugScreen() || MainConfig.getDisplayDayCountWhileShowingF3Info())) {
 
@@ -53,13 +44,13 @@ public class DayCountHud implements GuiLayer {
 
                 // Box Rendering
                 if (MainConfig.isBoxEnabled()) {
-                    int boxColor = (int) Long.parseLong(MainConfig.getBoxColorWithTransparency(), 16);
+                    int boxColor = ColorUtil.parseArgb(MainConfig.getBoxColorWithTransparency(), ColorUtil.DEFAULT_BOX_COLOR);
                     // Draw a rectangle with padding around the text
                     guiGraphics.fill(textX - 2, textY - 2, textX + textWidth + 1, textY + textHeight + 1, boxColor);
                 }
 
                 // Text Rendering
-                guiGraphics.text(mc.font, text, textX, textY, (int) Long.parseLong(currentTextColor, 16));
+                guiGraphics.text(mc.font, text, textX, textY, ColorUtil.parseArgb(MainConfig.getTextColorWithTransparency(), ColorUtil.DEFAULT_TEXT_COLOR));
 
                 pose.popMatrix();
             }
