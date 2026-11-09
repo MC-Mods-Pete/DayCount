@@ -13,6 +13,8 @@ public class MainConfig implements ConfigData
 {
     public static boolean isDayCountEnabled() { return INSTANCE.dayCountEnabled; }
 
+    public static boolean getDisplayDayCountWhileShowingF3Info() { return INSTANCE.displayDayCountWhileShowingF3Info; }
+
     public static int getDayOffset() { return INSTANCE.dayOffset; }
 
     public static float getSizeX() { return INSTANCE.sizeX; }
@@ -44,6 +46,10 @@ public class MainConfig implements ConfigData
     @ConfigEntry.Gui.Tooltip()
     @Comment("If true, the Day Count will be displayed | default: true")
     public boolean dayCountEnabled = true;
+
+    @ConfigEntry.Gui.Tooltip()
+    @Comment("If true, the Day Count will be displayed even when the debug info (F3) is shown | default: false")
+    private boolean displayDayCountWhileShowingF3Info = false;
 
     @ConfigEntry.Gui.Tooltip()
     @Comment("Offset to add to the Day Count | default: 1")

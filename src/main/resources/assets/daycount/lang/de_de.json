@@ -3,6 +3,7 @@
   "key.category.day_count_keybind": "DayCount Tastaturbelegung",
 
   "daycount.configuration.dayCountEnabled": "DayCount AN/AUS?",
+  "daycount.configuration.displayDayCountWhileShowingF3Info": "DayCount anzeigen während F3-Info sichtbar ist?",
   "daycount.configuration.dayOffset": "Offset in Tagen",
   "daycount.configuration.sizeX": "Horizontale Größe",
   "daycount.configuration.sizeY": "Vertikale Größe",
@@ -17,6 +18,8 @@
   "text.autoconfig.daycount.title": "DayCount",
   "text.autoconfig.daycount.option.dayCountEnabled": "DayCount anzeigen?",
   "text.autoconfig.daycount.option.dayCountEnabled.@Tooltip": "Wenn aktiviert, wird der DayCount angezeigt | Standard: aktiviert",
+  "text.autoconfig.daycount.option.displayDayCountWhileShowingF3Info": "DayCount bei F3-Anzeige einblenden?",
+  "text.autoconfig.daycount.option.displayDayCountWhileShowingF3Info.@Tooltip": "Wenn aktiviert, wird der DayCount auch bei sichtbaren Debug-Infos (F3) angezeigt | Standard: deaktiviert",
   "text.autoconfig.daycount.option.dayOffset": "Offset zum DayCounter addieren",
   "text.autoconfig.daycount.option.dayOffset.@Tooltip": "Minecraft startet bei Tag 0, hiermit kann ein anderer Startwert festgelegt werden | Standard: 1",
   "text.autoconfig.daycount.option.sizeX": "Horizontale Größe des DayCounters",
