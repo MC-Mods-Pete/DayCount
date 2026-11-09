@@ -11,7 +11,7 @@ import org.lwjgl.glfw.GLFW;
 
 public class KeyInputHandler {
     public static final KeyMapping.Category DAY_COUNT_CATEGORY =
-            KeyMapping.Category.register(Identifier.fromNamespaceAndPath(DayCount.MOD_ID, "category"));
+            KeyMapping.Category.register(Identifier.fromNamespaceAndPath(DayCount.MOD_ID, "day_count"));
     public static final String KEY_DAY_COUNT = "key.daycount.day_count";
 
     public static KeyMapping dayCountKey;
