@@ -7,7 +7,6 @@ import net.minecraft.client.KeyMapping;
 import net.minecraft.resources.Identifier;
 import net.petemc.daycount.DayCount;
 import net.petemc.daycount.config.MainConfig;
-import org.lwjgl.glfw.GLFW;
 
 public class KeyInputHandler {
     public static final KeyMapping.Category DAY_COUNT_CATEGORY =
@@ -26,7 +25,7 @@ public class KeyInputHandler {
 
     public static void register() {
         dayCountKey = KeyMappingHelper.registerKeyMapping(
-                new KeyMapping(KEY_DAY_COUNT, InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_B, DAY_COUNT_CATEGORY)
+                new KeyMapping(KEY_DAY_COUNT, InputConstants.KEYCODE_B, DAY_COUNT_CATEGORY)
         );
         registerKeyInputs();
     }
