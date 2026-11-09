@@ -13,7 +13,7 @@
     "issues": "https://github.com/MC-Mods-Pete/DayCount/issues"
   },
   "license": "MIT",
-  "icon": "assets/daycountmod/icon.png",
+  "icon": "daycount.png",
   "environment": "*",
   "entrypoints": {
     "client": [

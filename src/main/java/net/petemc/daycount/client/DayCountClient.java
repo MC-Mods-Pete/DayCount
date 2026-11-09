@@ -8,19 +8,26 @@ import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.util.math.MatrixStack;
-import net.petemc.daycount.config.DayCountConfig;
+import net.minecraft.client.gui.DrawableHelper;
+import net.petemc.daycount.DayCount;
+import net.petemc.daycount.config.MainConfig;
+
+import java.text.NumberFormat;
 
 @Environment(EnvType.CLIENT)
 public class DayCountClient implements ClientModInitializer, HudRenderCallback {
+    private int currentDayTime = -1;
     private int cachedDayTime = -1;
 
     @Override
     public void onInitializeClient() {
+        DayCount.LOGGER.info("Initializing Day Count Mod");
+        MainConfig.init();
         KeyInputHandler.register();
 
         ClientTickEvents.START_CLIENT_TICK.register(client -> {
-            if (client.player != null) {
-                int currentDayTime = (int) (MinecraftClient.getInstance().world.getTimeOfDay() / 24000L);
+            if ((client.player != null) && (client.world != null)) {
+                currentDayTime = (int) (client.world.getTimeOfDay() / 24000L);
                 if (currentDayTime != cachedDayTime) {
                     // Day time has changed, update the cached value and do any necessary updates
                     cachedDayTime = currentDayTime;
@@ -34,15 +41,39 @@ public class DayCountClient implements ClientModInitializer, HudRenderCallback {
 
     @Override
     public void onHudRender(MatrixStack matrixStack, float v) {
-        if (DayCountConfig.INSTANCE.dayCountEnabled) {
-            int currentDay = (int) (MinecraftClient.getInstance().world.getTimeOfDay() / 24000L);
-            TextRenderer textRenderer = MinecraftClient.getInstance().textRenderer;
+        MinecraftClient mcClient = MinecraftClient.getInstance();
+        if (MainConfig.isDayCountEnabled()) {
+            if (mcClient.player != null) {
+                if ((!mcClient.player.isSpectator() && !mcClient.options.debugEnabled)) {
+                    TextRenderer textRenderer = mcClient.textRenderer;
 
-            matrixStack.push();
-            matrixStack.translate(DayCountConfig.INSTANCE.locationX, DayCountConfig.INSTANCE.locationY, 0);
-            matrixStack.scale(DayCountConfig.INSTANCE.sizeX, DayCountConfig.INSTANCE.sizeY, 2.5f);
-            textRenderer.drawWithShadow(matrixStack, "Day: " + (currentDay + DayCountConfig.INSTANCE.dayOffset), 2, 2, DayCountConfig.INSTANCE.color);
-            matrixStack.pop();
+                    int dayCount = (currentDayTime + MainConfig.getDayOffset());
+                    String formattedDayCount = MainConfig.getUseLocaleFormatting()
+                            ? NumberFormat.getInstance().format(dayCount)
+                            : String.valueOf(dayCount);
+
+                    String text = MainConfig.getDayCounterString() + formattedDayCount;
+                    int textWidth = textRenderer.getWidth(text);
+                    int textHeight = textRenderer.fontHeight;
+                    int textX = 0;
+                    int textY = 0;
+
+                    matrixStack.push();
+                    matrixStack.translate(MainConfig.getLocationX(), MainConfig.getLocationY(), 0);
+                    matrixStack.scale(MainConfig.getSizeX(), MainConfig.getSizeY(), 2.5f);
+
+                    // Box Rendering
+                    if (MainConfig.isBoxEnabled()) {
+                        int boxColor = (int) Long.parseLong(MainConfig.getBoxColorWithTransparency(), 16);
+                        // Draw a rectangle with padding around the text
+                        DrawableHelper.fill(matrixStack, textX - 2, textY - 2, textX + textWidth + 1, textY + textHeight + 1, boxColor);
+                    }
+
+                    // Text Rendering
+                    textRenderer.drawWithShadow(matrixStack, text, textX, textY, (int) Long.parseLong(MainConfig.getTextColor(), 16));
+                    matrixStack.pop();
+                }
+            }
         }
     }
 }

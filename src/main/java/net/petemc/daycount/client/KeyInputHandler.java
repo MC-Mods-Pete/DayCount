@@ -1,6 +1,6 @@
 package net.petemc.daycount.client;
 
-import net.petemc.daycount.config.DayCountConfig;
+import net.petemc.daycount.config.MainConfig;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.minecraft.client.option.KeyBinding;
@@ -18,7 +18,7 @@ public class KeyInputHandler {
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             if (dayCountKey.isPressed() && (debounce == 5)) {
                 debounce--;
-                DayCountConfig.INSTANCE.dayCountEnabled = !DayCountConfig.INSTANCE.dayCountEnabled;
+                MainConfig.INSTANCE.dayCountEnabled = !MainConfig.INSTANCE.dayCountEnabled;
             }
             if (debounce < 5) {
                 debounce--;
