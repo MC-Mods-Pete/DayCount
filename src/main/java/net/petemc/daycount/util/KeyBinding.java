@@ -4,7 +4,6 @@ import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.resources.Identifier;
 import net.minecraftforge.client.settings.KeyConflictContext;
-import org.lwjgl.glfw.GLFW;
 
 public class KeyBinding {
     public static final Identifier KEY_CATEGORY_DAY_COUNT = Identifier.withDefaultNamespace("key.category.day_count_keybind");
@@ -13,8 +12,8 @@ public class KeyBinding {
     public static final KeyMapping DAYCOUNT_KEY = new KeyMapping(
             KEY_DAY_COUNT,
             KeyConflictContext.IN_GAME,
-            InputConstants.Type.KEYSYM,
-            GLFW.GLFW_KEY_B,
+            InputConstants.Type.KEYBOARD,
+            InputConstants.KEY_B,
             KeyMapping.Category.register(KEY_CATEGORY_DAY_COUNT),
             0);
 }
