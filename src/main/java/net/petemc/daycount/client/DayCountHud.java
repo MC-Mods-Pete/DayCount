@@ -35,7 +35,8 @@ public class DayCountHud implements Gui.RenderFunction {
             if (mc.level != null) {
                 int currentDay = (int) (mc.level.getDayTime() / 24000L);
                 if (mc.gameMode != null) {
-                    if (mc.gameMode.getPlayerMode().isSurvival() || mc.gameMode.getPlayerMode().isCreative()) {
+                    if ((mc.gameMode.getPlayerMode().isSurvival() || mc.gameMode.getPlayerMode().isCreative()) &&
+                            !mc.getDebugOverlay().showDebugScreen()) {
                         Matrix3x2fStack matrixStack = guiGraphics.pose();
                         matrixStack.pushMatrix();
                         matrixStack.translate(MainConfig.getLocationX(), MainConfig.getLocationY(), matrixStack);
