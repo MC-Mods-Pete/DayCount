@@ -7,6 +7,7 @@ import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.petemc.daycount.DayCount;
+import net.petemc.daycount.config.MainConfig;
 import net.petemc.daycount.client.DayCountHud;
 import net.petemc.daycount.util.KeyBinding;
 
@@ -17,12 +18,12 @@ public class ClientEvents {
         @SubscribeEvent
         public static void onKeyInput(InputEvent.Key event) {
             if (KeyBinding.DAYCOUNT_KEY.consumeClick()) {
-                DayCount.dayCountEnabled = !DayCount.dayCountEnabled;
+                MainConfig.toggleDayCountEnabled();
             }
         }
 
         @SubscribeEvent
-        public static void registerGuiOverlays(CustomizeGuiOverlayEvent event) {
+        public static void registerGuiOverlays(CustomizeGuiOverlayEvent.Chat event) {
             DayCountHud.DAY_COUNT_HUD_INSTANCE.render(event.getGuiGraphics(), event.getPartialTick());
         }
     }
