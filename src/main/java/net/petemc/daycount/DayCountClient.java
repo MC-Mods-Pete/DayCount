@@ -18,8 +18,6 @@ import net.petemc.daycount.config.MainConfig;
 @EventBusSubscriber(modid = DayCount.MOD_ID, value = Dist.CLIENT)
 public class DayCountClient {
 
-    public static boolean dayCountEnabled = false;
-
     public DayCountClient(ModContainer modContainer) {
         // Allows NeoForge to create a config screen for this mod's configs.
         // The config screen is accessed by going to the Mods screen > clicking on your mod > clicking on config.
@@ -32,8 +30,6 @@ public class DayCountClient {
     @SubscribeEvent
     static void onClientSetup(FMLClientSetupEvent event) {
         DayCount.LOGGER.info("Initializing DayCount mod for NeoForge");
-        DayCountClient.dayCountEnabled = MainConfig.getDayCountEnabled();
-        DayCountHud.setCurrentTextColor(MainConfig.getTextColorWithTransparency());
         DayCountHud.init();
     }
 }

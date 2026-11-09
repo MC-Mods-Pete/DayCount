@@ -1,6 +1,6 @@
 {
   "key.daycount.day_count": "Toggle Day Count",
-  "key.category.day_count_keybind": "Day Count Keybinds",
+  "key.category.daycount.day_count": "Day Count Keybinds",
 
   "daycount.configuration.dayCountEnabled": "DayCount ON/OFF?",
   "daycount.configuration.displayDayCountWhileShowingF3Info": "Show DayCount with F3 Info?",
