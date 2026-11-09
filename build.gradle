@@ -5,7 +5,7 @@ plugins {
     id 'org.parchmentmc.librarian.forgegradle' version '1.+'
 }
 
-version = '1.6.0-Forge-mc1.19'
+version = mod_version
 group = 'net.petemc.daycount' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'DayCount'
 
