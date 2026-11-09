@@ -25,8 +25,6 @@ public class DayCount {
 
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MOD_ID);
 
-    public static boolean dayCountEnabled = false;
-
     public DayCount(FMLJavaModLoadingContext context) {
         BusGroup modBusGroup = context.getModBusGroup();
 
@@ -66,8 +64,6 @@ public class DayCount {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
             LOGGER.info("Initializing DayCount mod for Forge");
-            dayCountEnabled = MainConfig.getDayCountEnabled();
-            DayCountHud.setCurrentTextColor(MainConfig.getTextColorWithTransparency());
             DayCountHud.init();
         }
     }

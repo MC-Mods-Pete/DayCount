@@ -11,6 +11,9 @@ public class MainConfig
 {
     public static boolean getDayCountEnabled() { return dayCountEnabled; }
 
+    // Runtime toggle via key binding, not saved; reset to the config value when the config is (re)loaded
+    public static void toggleDayCountEnabled() { dayCountEnabled = !dayCountEnabled; }
+
     public static boolean getDisplayDayCountWhileShowingF3Info() { return displayDayCountWhileShowingF3Info; }
 
     public static int getDayOffset() {
