@@ -22,8 +22,6 @@ public class DayCount {
     public static final String MOD_ID = "daycount";
     public static final Logger LOGGER = LogUtils.getLogger();
 
-    public static boolean dayCountEnabled = false;
-
     public DayCount(IEventBus modEventBus, ModContainer modContainer) {
         modEventBus.addListener(this::commonSetup);
 
@@ -53,8 +51,6 @@ public class DayCount {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
             LOGGER.info("Initializing DayCount mod for Forge");
-            dayCountEnabled = MainConfig.getDayCountEnabled();
-            DayCountHud.setCurrentTextColor(MainConfig.getTextColor());
             DayCountHud.init();
         }
     }
