@@ -1,0 +1,18 @@
+DayCount Changelog
+==================
+
+1.6.1-Forge-mc1.21.9
+--------------------
+New
+ - German translation
+ - Optional background box behind the day counter (isBoxEnabled, boxColorWithTransparency)
+ - Option to format the day number with the system's number format, e.g. 1,000 (useLocaleFormatting)
+ - New config option to show the day counter while the debug screen (F3) is open
+Fixes
+ - Invalid colors in the config no longer crash the game, the default color is used instead
+ - Colors with 6 digits (RRGGBB, e.g. FFFFFF) are now shown fully opaque instead of invisible; # or 0x in front of a color is accepted
+ - Changes to the text color and to dayCountEnabled in the config now apply without a restart
+ - A custom day counter text (dayCounterString) in the config is now actually used
+ - The key binding category in the controls screen now shows its name instead of a raw translation key
+Changes
+ - Only marked as compatible with Minecraft 1.21.9 and 1.21.10, Minecraft 1.21.11 has its own version
