@@ -57,7 +57,8 @@ dependencies {
     modApi("me.shedaniel.cloth:cloth-config-fabric:${project.cloth_config_version}") {
         exclude(group: "net.fabricmc.fabric-api")
     }
-    include "me.shedaniel.cloth:cloth-config-fabric:${project.cloth_config_version}"
+    // Cloth Config is not bundled: no single version works on 1.21.9-1.21.11 (20.x for 1.21.9/1.21.10, 21.x for 1.21.11),
+    // so it is a required dependency the player installs in the matching version (see fabric.mod.json)
 }
 
 processResources {
