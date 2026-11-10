@@ -25,7 +25,7 @@ public class DayCountClient implements ClientModInitializer {
 
         HudElementRegistry.addLast(dayCountHudElement, (guiGraphics, tCounter) -> {
             Minecraft mc = Minecraft.getInstance();
-            if (MainConfig.isDayCountEnabled() && !mc.options.hideGui && mc.level != null && mc.gameMode != null) {
+            if (MainConfig.isDayCountEnabled() && mc.level != null && mc.gameMode != null) {
                 int currentDay = (int) (mc.level.getOverworldClockTime() / 24000L);
                 if ((mc.gameMode.getPlayerMode().isSurvival() || mc.gameMode.getPlayerMode().isCreative()) &&
                         (!mc.getDebugOverlay().showDebugScreen() || MainConfig.getDisplayDayCountWhileShowingF3Info())) {
