@@ -10,6 +10,7 @@ mod_id = project.mod_id
 loader_version = project.loader_version
 fabric_api_version = project.fabric_api_version
 minecraft_version = project.minecraft_version
+minecraft_version_range = project.minecraft_version_range
 java_version_range = project.java_version_range
 cloth_config_version = project.cloth_config_version
 modmenu_version = project.modmenu_version
@@ -72,6 +73,7 @@ processResources {
 	inputs.property "mod_name", mod_name
 	inputs.property "loader_version", loader_version
 	inputs.property "minecraft_version", minecraft_version
+	inputs.property "minecraft_version_range", minecraft_version_range
 	inputs.property "java_version_range", java_version_range
 	inputs.property "cloth_config_version", cloth_config_version
 	inputs.property "modmenu_version", modmenu_version
@@ -79,7 +81,7 @@ processResources {
 
 			filesMatching("fabric.mod.json") {
 		expand "version": version, "mod_id": mod_id, "mod_name": mod_name, "loader_version": loader_version,
-				"minecraft_version": minecraft_version, "java_version_range": java_version_range,
+				"minecraft_version": minecraft_version, "minecraft_version_range": minecraft_version_range, "java_version_range": java_version_range,
 				"cloth_config_version" : cloth_config_version, "modmenu_version": modmenu_version, "jade_version": jade_version
 	}
 }
