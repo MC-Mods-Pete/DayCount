@@ -9,7 +9,6 @@ import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.gui.ConfigurationScreen;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
-import net.neoforged.neoforge.common.NeoForge;
 import net.petemc.daycount.client.DayCountHud;
 import net.petemc.daycount.config.MainConfig;
 
@@ -18,8 +17,6 @@ import net.petemc.daycount.config.MainConfig;
 // You can use EventBusSubscriber to automatically register all static methods in the class annotated with @SubscribeEvent
 @EventBusSubscriber(modid = DayCount.MOD_ID, value = Dist.CLIENT)
 public class DayCountClient {
-
-    public static boolean dayCountEnabled = false;
 
     public DayCountClient(ModContainer modContainer) {
         // Allows NeoForge to create a config screen for this mod's configs.
@@ -32,9 +29,7 @@ public class DayCountClient {
 
     @SubscribeEvent
     static void onClientSetup(FMLClientSetupEvent event) {
-        DayCount.LOGGER.info("Initializing DayCount mod for Forge");
-        DayCountClient.dayCountEnabled = MainConfig.getDayCountEnabled();
-        DayCountHud.setCurrentTextColor(MainConfig.getTextColorWithTransparency());
+        DayCount.LOGGER.info("Initializing DayCount mod for NeoForge");
         DayCountHud.init();
     }
 }
