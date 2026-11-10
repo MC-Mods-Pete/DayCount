@@ -83,7 +83,7 @@ public class MainConfig
             .defineInRange("locationY", 2.0, 0.0, 20000.0);
 
     private static final ModConfigSpec.ConfigValue<String> TEXT_COLOR = BUILDER_CLIENT
-            .comment("Color of the Day Counter | default: FFFFFF (for white)")
+            .comment("Color of the Day Counter as RRGGBB or AARRGGBB (with transparency, e.g. 80FFFFFF) | default: FFFFFF (for white)")
             .define("textColor", "FFFFFF");
 
     private static final ModConfigSpec.ConfigValue<String> DAY_COUNT_STRING = BUILDER_CLIENT
