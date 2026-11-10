@@ -29,7 +29,7 @@ public class DayCountClient implements ClientModInitializer, HudRenderCallback {
         MinecraftClient mcClient = MinecraftClient.getInstance();
         if (MainConfig.isDayCountEnabled() && !mcClient.options.hudHidden) {
             if (mcClient.player != null && mcClient.world != null) {
-                if ((!mcClient.player.isSpectator() && (!mcClient.options.debugEnabled || MainConfig.getDisplayDayCountWhileShowingF3Info()))) {
+                if ((!mcClient.player.isSpectator() && (!mcClient.getDebugHud().shouldShowDebugHud() || MainConfig.getDisplayDayCountWhileShowingF3Info()))) {
                     TextRenderer textRenderer = mcClient.textRenderer;
                     MatrixStack matrixStack = drawContext.getMatrices();
 
