@@ -17,7 +17,7 @@ public class DayCountHud {
 
     public void render(GuiGraphicsExtractor guiGraphics, DeltaTracker pDeltaTracker) {
         Minecraft mc = Minecraft.getInstance();
-        if (MainConfig.getDayCountEnabled() && !mc.options.hideGui && mc.level != null && mc.gameMode != null) {
+        if (MainConfig.getDayCountEnabled() && mc.level != null && mc.gameMode != null) {
             int currentDay = (int) (mc.level.getOverworldClockTime() / 24000L);
             if ((mc.gameMode.getPlayerMode().isSurvival() || mc.gameMode.getPlayerMode().isCreative()) &&
                     (!mc.getDebugOverlay().showDebugScreen() || MainConfig.getDisplayDayCountWhileShowingF3Info())) {
