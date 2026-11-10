@@ -6,6 +6,7 @@ import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.neoforged.neoforge.client.gui.GuiLayer;
 import net.petemc.daycount.config.MainConfig;
 import net.petemc.daycount.util.ColorUtil;
+import net.petemc.daycount.util.HudVisibility;
 import org.jetbrains.annotations.NotNull;
 
 import java.text.NumberFormat;
@@ -20,8 +21,8 @@ public class DayCountHud implements GuiLayer {
     @Override
     public void render(@NotNull GuiGraphicsExtractor guiGraphics, @NotNull DeltaTracker deltaTracker) {
         Minecraft mc = Minecraft.getInstance();
-        // RenderGuiEvent.Post also fires while the HUD is hidden (F1), so check hideGui here
-        if (MainConfig.getDayCountEnabled() && !mc.options.hideGui && mc.level != null && mc.gameMode != null) {
+        // RenderGuiEvent.Post also fires while the HUD is hidden (F1), so check that here
+        if (MainConfig.getDayCountEnabled() && !HudVisibility.isHidden(mc) && mc.level != null && mc.gameMode != null) {
             int currentDay = (int) (mc.level.getOverworldClockTime() / 24000L);
             if ((mc.gameMode.getPlayerMode().isSurvival() || mc.gameMode.getPlayerMode().isCreative()) &&
                     (!mc.getDebugOverlay().showDebugScreen() || MainConfig.getDisplayDayCountWhileShowingF3Info())) {
