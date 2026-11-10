@@ -72,7 +72,7 @@ public class MainConfig implements ConfigData
     private float locationY = 2.0f;
 
     @ConfigEntry.Gui.Tooltip()
-    @Comment("Color of the Day Counter | default: FFFFFF (for white)")
+    @Comment("Color of the Day Counter as RRGGBB or AARRGGBB (with transparency, e.g. 80FFFFFF) | default: FFFFFF (for white)")
     private String textColor = "ffffff";
 
     @ConfigEntry.Gui.Tooltip()
