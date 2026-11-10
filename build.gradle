@@ -32,7 +32,8 @@ dependencies {
     modApi("me.shedaniel.cloth:cloth-config-fabric:8.3.134") {
         exclude(group: "net.fabricmc.fabric-api")
     }
-    include "me.shedaniel.cloth:cloth-config-fabric:${cloth_config_version}"
+    // Cloth Config is not bundled: 8.x only works on 1.19-1.19.2 (9.x for 1.19.3, 10.x for 1.19.4),
+    // so it is a required dependency the player installs in the matching version (see fabric.mod.json)
 
     modImplementation "curse.maven:jade-324717:${jade_version}"
 }
