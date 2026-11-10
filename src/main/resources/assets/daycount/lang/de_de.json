@@ -31,7 +31,7 @@
   "text.autoconfig.daycount.option.locationY": "Vertikale Position des DayCounters",
   "text.autoconfig.daycount.option.locationY.@Tooltip": "Vertikale Position (Y-Wert) des DayCounters | Standard: 2.0",
   "text.autoconfig.daycount.option.textColor": "DayCounter Farbe",
-  "text.autoconfig.daycount.option.textColor.@Tooltip": "Farbe des DayCounters | Standard: FFFFFF",
+  "text.autoconfig.daycount.option.textColor.@Tooltip": "Farbe des DayCounters als RRGGBB oder AARRGGBB (mit Transparenz, z.B. 80FFFFFF) | Standard: FFFFFF",
   "text.autoconfig.daycount.option.dayCounterString": "Benutzerdefinierter DayCount-Text",
   "text.autoconfig.daycount.option.dayCounterString.@Tooltip": "Benutzerdefinierter DayCount-Text | Standard: 'Day: '",
   "text.autoconfig.daycount.option.useLocaleFormatting": "Locale-Formatierung verwenden",
