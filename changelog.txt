@@ -1,0 +1,13 @@
+DayCount Changelog
+==================
+
+1.6.1-NeoForge-mc26.1
+---------------------
+Fixes
+ - Invalid colors in the config no longer crash the game, the default color is used instead
+ - Colors with 6 digits (RRGGBB, e.g. FFFFFF) are now shown fully opaque instead of invisible; # or 0x in front of a color is accepted
+ - Changes to the text color and to dayCountEnabled in the config now apply without a restart
+ - The day counter now hides together with the rest of the HUD when pressing F1
+ - The key binding category in the controls screen now shows its name instead of a raw translation key
+Changes
+ - Only marked as compatible with Minecraft 26.1 to 26.2, Minecraft 26.3 has its own version
