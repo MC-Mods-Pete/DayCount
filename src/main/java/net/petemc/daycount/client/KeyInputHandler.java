@@ -1,14 +1,17 @@
 package net.petemc.daycount.client;
 
+import net.petemc.daycount.DayCount;
 import net.petemc.daycount.config.MainConfig;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
+import net.minecraft.util.Identifier;
 import org.lwjgl.glfw.GLFW;
 
 public class KeyInputHandler {
-    public static final String KEY_CATEGORY_DAY_COUNT = "key.category.day_count_keybind";
+    // Since 1.21.9 the category label is the translation key "key.category.<namespace>.<path>"
+    public static final KeyBinding.Category KEY_CATEGORY_DAY_COUNT = KeyBinding.Category.create(Identifier.of(DayCount.MOD_ID, "day_count"));
     public static final String KEY_DAY_COUNT = "key.daycount.day_count";
 
     public static KeyBinding dayCountKey;

@@ -1,6 +1,6 @@
 {
   "key.daycount.day_count": "DayCount umschalten",
-  "key.category.day_count_keybind": "DayCount Tastaturbelegung",
+  "key.category.daycount.day_count": "DayCount Tastaturbelegung",
 
   "daycount.configuration.dayCountEnabled": "DayCount AN/AUS?",
   "daycount.configuration.displayDayCountWhileShowingF3Info": "DayCount anzeigen während F3-Info sichtbar ist?",
