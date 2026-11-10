@@ -61,7 +61,7 @@ public class DayCountClient implements ClientModInitializer {
                     }
 
                     // Text Rendering
-                    drawContext.drawTextWithShadow(textRenderer, text, textX, textY, ColorUtil.parseArgb(MainConfig.getTextColor(), ColorUtil.DEFAULT_TEXT_COLOR));
+                    drawContext.drawTextWithShadow(textRenderer, text, textX, textY, ColorUtil.parseArgb(MainConfig.getTextColorWithTransparency(), ColorUtil.DEFAULT_TEXT_COLOR));
                     matrixStack.popMatrix();
                 }
             }

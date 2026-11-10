@@ -25,7 +25,7 @@ public class MainConfig implements ConfigData
 
     public static float getLocationY() { return INSTANCE.locationY; }
 
-    public static String getTextColor() { return INSTANCE.textColor; }
+    public static String getTextColorWithTransparency() { return INSTANCE.textColorWithTransparency; }
 
     public static String getDayCounterString() { return INSTANCE.dayCounterString; }
 
@@ -72,8 +72,8 @@ public class MainConfig implements ConfigData
     private float locationY = 2.0f;
 
     @ConfigEntry.Gui.Tooltip()
-    @Comment("Color of the Day Counter | default: FFFFFF (for white)")
-    private String textColor = "ffffff";
+    @Comment("Color of the Day Counter (with transparency) | default: FFFFFFFF (the first FFs are the transparency value)")
+    private String textColorWithTransparency = "FFFFFFFF";
 
     @ConfigEntry.Gui.Tooltip()
     @Comment("DayCounter String | default: 'Day: '")
