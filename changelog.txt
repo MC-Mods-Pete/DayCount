@@ -1,6 +1,21 @@
 DayCount Changelog
 ==================
 
+1.6.1-Fabric-mc1.20.2
+---------------------
+New
+ - Own version for Minecraft 1.20.2 to 1.20.6
+ - New config option to show the day counter while the debug screen (F3) is open
+Fixes
+ - The game no longer crashes on Minecraft 1.20.2 to 1.20.6 when the day counter is drawn
+ - The day counter was drawn once more for every in-game day that passed during a session, so the background box got darker over time and it cost performance
+ - Invalid colors in the config no longer crash the game, the default color is used instead
+ - Box colors with 6 digits (RRGGBB, e.g. 000000) are now shown fully opaque, the box was invisible with them before; # or 0x in front of a color is accepted
+Changes
+ - The text color option now explains that it also accepts a transparency value (AARRGGBB, e.g. 80FFFFFF)
+ - Cloth Config is no longer included in the download and has to be installed separately (Cloth Config is a required dependency)
+ - Marked as compatible with Minecraft 1.20.2 to 1.20.6
+
 1.6.1-Fabric-mc1.20
 -------------------
 New
