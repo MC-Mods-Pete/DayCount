@@ -27,7 +27,8 @@ public class DayCountHud implements Gui.RenderFunction {
 
     @Override
     public void render(@NotNull GuiGraphics guiGraphics, @NotNull DeltaTracker deltaTracker) {
-        if (DayCountClient.dayCountEnabled) {
+        // RenderGuiEvent.Post also fires while the HUD is hidden (F1), so check hideGui here
+        if (DayCountClient.dayCountEnabled && !Minecraft.getInstance().options.hideGui) {
             Minecraft mc = Minecraft.getInstance();
             assert mc.level != null;
             int currentDay = (int) (mc.level.getDayTime() / 24000L);
