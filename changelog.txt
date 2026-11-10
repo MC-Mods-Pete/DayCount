@@ -1,0 +1,15 @@
+DayCount Changelog
+==================
+
+1.6.1-NeoForge-mc1.21
+---------------------
+New
+ - New config option to show the day counter while the debug screen (F3) is open
+Fixes
+ - Invalid colors in the config no longer crash the game, the default color is used instead
+ - Box colors with 6 digits (RRGGBB, e.g. 000000) are now shown fully opaque, the box was invisible with them before; # or 0x in front of a color is accepted
+ - Changes to the text color and to dayCountEnabled in the config now apply without a restart
+ - The day counter now hides together with the rest of the HUD when pressing F1
+Changes
+ - The text color option now explains that it also accepts a transparency value (AARRGGBB, e.g. 80FFFFFF)
+ - Only marked as compatible with Minecraft 1.21 to 1.21.5, Minecraft 1.21.6 and later have their own versions
