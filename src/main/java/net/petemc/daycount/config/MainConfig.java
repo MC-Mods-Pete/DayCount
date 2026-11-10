@@ -11,6 +11,11 @@ public class MainConfig
 {
     public static boolean getDayCountEnabled() { return dayCountEnabled; }
 
+    // Runtime toggle via key binding, not saved; reset to the config value when the config is (re)loaded
+    public static void toggleDayCountEnabled() { dayCountEnabled = !dayCountEnabled; }
+
+    public static boolean getDisplayDayCountWhileShowingF3Info() { return displayDayCountWhileShowingF3Info; }
+
     public static int getDayOffset() {
         return dayOffset;
     }
@@ -35,6 +40,12 @@ public class MainConfig
 
     public static String getDayCounterString() { return dayCounterString; }
 
+    public static boolean getUseLocaleFormatting() { return useLocaleFormatting; }
+
+    public static boolean isBoxEnabled() { return isBoxEnabled; }
+
+    public static String getBoxColorWithTransparency() { return boxColorWithTransparency; }
+
     // Server Config
     private static final ModConfigSpec.Builder BUILDER_SERVER = new ModConfigSpec.Builder();
     // no server config
@@ -46,6 +57,10 @@ public class MainConfig
     private static final ModConfigSpec.BooleanValue DAY_COUNT_ENABLED = BUILDER_CLIENT
             .comment("If true, the Day Count will be displayed | default: true")
             .define("dayCountEnabled", true);
+
+    private static final ModConfigSpec.BooleanValue DISPLAY_DAY_COUNT_WHILE_SHOWING_F3 = BUILDER_CLIENT
+            .comment("If true, the Day Count will be displayed even when the debug info (F3) is shown | default: false")
+            .define("displayDayCountWhileShowingF3Info", false);
 
     private static final ModConfigSpec.IntValue DAY_OFFSET = BUILDER_CLIENT
             .comment("Offset to add to the Day Count | default: 1")
@@ -75,9 +90,22 @@ public class MainConfig
             .comment("DayCounter String | default: 'Day: '")
             .define("dayCounterString", "Day: ");
 
+    private static final ModConfigSpec.BooleanValue USE_LOCALE_FORMATTING = BUILDER_CLIENT
+            .comment("If true, the Day Count number will be formatted with locale-specific separators (e.g. 1,000) | default: false")
+            .define("useLocaleFormatting", false);
+
+    private static final ModConfigSpec.BooleanValue BOX_ENABLED = BUILDER_CLIENT
+            .comment("If true, the box will be displayed | default: false")
+            .define("isBoxEnabled", false);
+
+    private static final ModConfigSpec.ConfigValue<String> BOX_COLOR_WITH_TRANSPARENCY = BUILDER_CLIENT
+            .comment("Color of the box (with transparency) | default: 80000000")
+            .define("boxColorWithTransparency", "80000000");
+
     public static final ModConfigSpec SPEC_CLIENT = BUILDER_CLIENT.build();
 
     private static boolean dayCountEnabled = true;
+    private static boolean displayDayCountWhileShowingF3Info = false;
     private static int dayOffset = 1;
     private static float sizeX = 2.0f;
     private static float sizeY = 2.0f;
@@ -85,6 +113,9 @@ public class MainConfig
     private static float locationY = 2.0f;
     private static String textColorWithTransparency = "FFFFFFFF";
     private static String dayCounterString = "Day: ";
+    private static boolean useLocaleFormatting = false;
+    private static boolean isBoxEnabled = false;
+    private static String boxColorWithTransparency = "80000000";
 
     @SubscribeEvent
     static void onLoad(final ModConfigEvent event)
@@ -96,6 +127,7 @@ public class MainConfig
         if (SPEC_CLIENT.isLoaded()) {
             DayCount.LOGGER.info("Loading {} client config", DayCount.MOD_ID);
             dayCountEnabled = DAY_COUNT_ENABLED.get();
+            displayDayCountWhileShowingF3Info = DISPLAY_DAY_COUNT_WHILE_SHOWING_F3.get();
             dayOffset = DAY_OFFSET.get();
             sizeX = SIZE_X.get().floatValue();
             sizeY = SIZE_Y.get().floatValue();
@@ -103,6 +135,9 @@ public class MainConfig
             locationY = LOCATION_Y.get().floatValue();
             textColorWithTransparency = TEXT_COLOR_WITH_TRANSPARENCY.get();
             dayCounterString = DAY_COUNT_STRING.get();
+            useLocaleFormatting = USE_LOCALE_FORMATTING.get();
+            isBoxEnabled = BOX_ENABLED.get();
+            boxColorWithTransparency = BOX_COLOR_WITH_TRANSPARENCY.get();
         }
     }
 }
