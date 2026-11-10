@@ -1,0 +1,12 @@
+DayCount Changelog
+==================
+
+1.6.1-Fabric-mc26.3
+-------------------
+Fixes
+ - Invalid colors in the config no longer crash the game, the default color is used instead
+ - Colors with 6 digits (RRGGBB, e.g. FFFFFF) are now shown fully opaque instead of invisible; # or 0x in front of a color is accepted
+ - Changes to the text color in the config now apply without a restart
+ - The key binding category in the controls screen now shows its name instead of a raw translation key
+Changes
+ - Cloth Config is no longer included in the download and has to be installed separately (Cloth Config is a required dependency)
